@@ -1,8 +1,15 @@
 const admin = require('firebase-admin');
+admin.initializeApp();
+
+const os = require('os');
+const path = require('path');
 
 class FirebaseService {
 
-    getFile(bucketArquivo, enderecoArquivo) {
+    async getFile(bucketArquivo, 
+                    enderecoArquivo, 
+                    nomeArquivo = (Math.random().toString(36).substring(7) + '.txt')) {
+        
         const tempEnderecoArquivo = path.join(os.tmpdir(), nomeArquivo);
         
         const file = admin.storage()
@@ -17,4 +24,10 @@ class FirebaseService {
         }
     }
 
+    async moveFile(file, novoEndereco) {
+        await file.move(novoEndereco);
+    }
+
 }
+
+module.exports = new FirebaseService
