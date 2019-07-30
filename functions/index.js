@@ -1,5 +1,6 @@
 const functions = require('firebase-functions');
 const firebaseService  = require('./services/firebase-service');
+const loaderService  = require('./services/loader-service');
 
 const fs = require('fs');
 const path = require('path');
@@ -18,7 +19,11 @@ exports.loaderArquivo1 = functions
 
         let arquivo = await firebaseService.getFile(bucketArquivo, enderecoArquivo);
 
+        let carregados = await loaderService.readFile(arquivo.tempEnderecoArquivo);
+        
         const novoEnderecoArquivo = path.join(path.dirname(enderecoArquivo) + '/processados/', nomeArquivo);
+
+        await firebaseService.adicionarSumarios(carregados, novoEnderecoArquivo);
         await firebaseService.moveFile(arquivo.file, novoEnderecoArquivo)
 
         return fs.unlinkSync(arquivo.tempEnderecoArquivo);

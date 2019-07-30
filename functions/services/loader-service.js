@@ -15,8 +15,8 @@ class LoaderService {
         var transacoes = [];
 
         return new Promise(
-            function(resolve, reject) {
-                leitor.on('line', function(linha) {
+            (resolve, reject) => {
+                leitor.on('line', (linha) => {
                     let linhaSplitada = linha.split(';');
                     valor++;
 
@@ -39,21 +39,20 @@ class LoaderService {
                         data: transacao.data.getDate(),
                         hora: transacao.data.getHours(),
                         valor: 1,
-                        quantidade: 1,
-                        toString: function(){ 
-                            return this.tipo+this.formaPagamento+this.ano+this.mes+this.data+this.hora;
-                        }
+                        quantidade: 1
                     };
                     
-                    if (mapa.has(resumoTransacao.toString())) {
-                        let t = mapa.get(resumoTransacao.toString()); 
+                    let resumo = LoaderService.gerarToStringTransacao(resumoTransacao);
+
+                    if (mapa.has(resumo)) {
+                        let t = mapa.get(resumo); 
                         t.valor += transacao.valor;
                         t.quantidade++;
                     } else {
-                        mapa.set(resumoTransacao.toString(), resumoTransacao);
+                        mapa.set(resumo, resumoTransacao);
                     }
 
-                }).on('close', function() {
+                }).on('close', () => {
                     resolve({
                         transacoes, 
                         sumarios: mapa,
@@ -63,6 +62,10 @@ class LoaderService {
             }
         );
     }  
+    
+    static gerarToStringTransacao(transacao) {
+        return transacao.tipo + transacao.formaPagamento + transacao.ano + transacao.mes + transacao.data + transacao.hora;
+    }
 }
 
 module.exports = new LoaderService

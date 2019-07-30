@@ -28,6 +28,30 @@ class FirebaseService {
         await file.move(novoEndereco);
     }
 
+    async adicionarSumarios(valores, nomeArquivo) {
+        let firestore = admin.firestore();
+        
+        // let sumarios = firestore.collection('sumarios');
+        // let transacoes = firestore.collection('transacoes');
+        let arquivos = firestore.collection('arquivos');
+        
+        // valores.transacoes.array.forEach(transacao => {
+        //     transacoes.add(transacao);
+        // });
+
+        // valor.sumarios.forEach(sumario => {
+        //     sumarios.add(sumario)
+        // });
+        let arquivo = {
+            dataCriacao: new Date().getTime(),
+            linhas: valores.quantidade,
+            endereco: nomeArquivo
+        }
+
+        return arquivos.add(arquivo);
+    }
+
+
 }
 
 module.exports = new FirebaseService
