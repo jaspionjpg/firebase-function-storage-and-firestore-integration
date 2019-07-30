@@ -1,5 +1,5 @@
 const functions = require('firebase-functions');
-const firebaseService  = require('./services/firebase-service')
+const firebaseService  = require('./services/firebase-service');
 
 const fs = require('fs');
 const path = require('path');

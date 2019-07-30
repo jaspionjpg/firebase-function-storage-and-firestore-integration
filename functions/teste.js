@@ -1,7 +1,7 @@
 const loaderService  = require('./services/loader-service')
 
-const asdf = loaderService.readFile('./transacoes nao conciliadas.txt')
+const asdf = loaderService.readFile('./transacoes_nao_conciliadas.txt')
 
 asdf.then((valor) => {
-    console.log("valor foi: " + valor)
+    console.log(valor);
 })
