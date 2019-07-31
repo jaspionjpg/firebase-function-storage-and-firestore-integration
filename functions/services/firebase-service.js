@@ -31,21 +31,18 @@ class FirebaseService {
     async adicionarSumarios(valores, nomeArquivo) {
         let firestore = admin.firestore();
         
-        // let sumarios = firestore.collection('sumarios');
-        // let transacoes = firestore.collection('transacoes');
+        let sumarios = firestore.collection('sumarios');
         let arquivos = firestore.collection('arquivos');
         
-        // valores.transacoes.array.forEach(transacao => {
-        //     transacoes.add(transacao);
-        // });
-
-        // valor.sumarios.forEach(sumario => {
-        //     sumarios.add(sumario)
-        // });
+        valores.sumarios.forEach(sumario => {
+            sumarios.add(sumario)
+        });
+        
         let arquivo = {
             dataCriacao: new Date().getTime(),
             linhas: valores.quantidade,
-            endereco: nomeArquivo
+            endereco: nomeArquivo,
+            transacoes: valores.transacoes
         }
 
         return arquivos.add(arquivo);

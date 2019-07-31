@@ -29,8 +29,6 @@ class LoaderService {
                         formaPagamento: linhaSplitada[5]
                     }
 
-                    transacoes.push(transacao);
-        
                     let resumoTransacao = {
                         tipo: transacao.tipo,
                         formaPagamento: transacao.formaPagamento,
@@ -51,6 +49,9 @@ class LoaderService {
                     } else {
                         mapa.set(resumo, resumoTransacao);
                     }
+
+                    transacao.data = transacao.data.getTime()
+                    transacoes.push(transacao);
 
                 }).on('close', () => {
                     resolve({
