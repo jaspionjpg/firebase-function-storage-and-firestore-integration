@@ -47,8 +47,6 @@ class FirebaseService {
 
         return arquivos.add(arquivo);
     }
-
-
 }
 
 module.exports = new FirebaseService

@@ -33,7 +33,7 @@ class LoaderService {
                         tipo: transacao.tipo,
                         formaPagamento: transacao.formaPagamento,
                         ano: transacao.data.getFullYear(),
-                        mes: transacao.data.getMonth(),
+                        mes: transacao.data.getMonth() + 1,
                         data: transacao.data.getDate(),
                         hora: transacao.data.getHours(),
                         valor: 1,

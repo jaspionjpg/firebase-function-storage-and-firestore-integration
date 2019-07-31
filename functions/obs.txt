@@ -1,0 +1,2 @@
+firebase firestore:delete --all-collections
+--- comando deleta todas coleções do firestore

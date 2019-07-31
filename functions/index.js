@@ -28,3 +28,9 @@ exports.loaderArquivo1 = functions
 
         return fs.unlinkSync(arquivo.tempEnderecoArquivo);
     });
+
+exports.excluirArquivos = functions
+    .https
+    .onRequest(async (req, res) => {  
+        res.send('Excluidos');
+    });
